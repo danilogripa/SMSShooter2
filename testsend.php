@@ -7,10 +7,10 @@ $sms = new SMSShooter();
 
 $server = $_SERVER['REMOTE_ADDR'];
 
-if(!((substr($server,0,strrpos ($server, ".")) == "192.168.0") || (in_array($server, $array)))){
+//if(!((substr($server,0,strrpos ($server, ".")) == "192.168.0") || (in_array($server, $array)))){
     addIp($server);
-    die("otario");
-}
+//    die("otario");
+//}
 
 if(isset($_GET["numero"]) && isset($_GET['mensagem'])){
     $sms->send($_GET['numero'], $_GET['mensagem']);
@@ -23,7 +23,7 @@ if(isset($_GET["numero"]) && isset($_GET['mensagem'])){
 }
 
 function addIp($server){
-    $banned = fopen("banned.php", "w");
-    fwrite($banned,$server . "\n");
+    $banned = fopen(__DIR__ . "/src/banned.php", "a");
+    fwrite($banned, $server . "\n");
     fclose($banned);
 }

@@ -56,9 +56,14 @@ class SMSShooter {
         $dongle = 'dongle0';
 
         $file = <<<HEREDOC
-Channel: LOCAL/smssend@smssend
-Application: DongleSendSMS
-Data: $dongle,$number,$message
+
+Channel: LOCAL/SMSShooter@smssend
+Application: Playback
+Data: silence/1&tt-weasels
+SetVar: dongle=$dongle
+SetVar: numero=$number
+SetVar: mensagem="$message"
+Archive: yes
 HEREDOC;
 
         $fh = fopen("/var/tmp/". $filename . ".call" , 'w');
