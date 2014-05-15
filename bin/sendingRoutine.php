@@ -6,5 +6,5 @@
  * Time: 14:20
  */
 
-$command="mv /var/tmp/* /var/spool/asterisk/outgoing/";
+$command = "mv " . __DIR__ . "/../tmp/send/* /var/spool/asterisk/outgoing/";
 $output = shell_exec("$command ");

@@ -20,8 +20,6 @@ class SMSShooter {
         $this->priority = $priority;
     }
 
-//    public function send(){}
-//    public function send($number, $message, $priority = null){}
     public function startsWith($haystack, $needle){
         return $needle === "" || strpos($haystack, $needle) === 0;
     }
@@ -66,7 +64,7 @@ SetVar: mensagem="$message"
 Archive: yes
 HEREDOC;
 
-        $fh = fopen("/var/tmp/". $filename . ".call" , 'w');
+	$fh = fopen(__DIR__ . "/../tmp/send/" . $filename . ".call", "w");
         fwrite($fh, $file);
         fclose($fh);
     }
