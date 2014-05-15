@@ -67,6 +67,11 @@ HEREDOC;
 	$fh = fopen(__DIR__ . "/../tmp/send/" . $filename . ".call", "w");
         fwrite($fh, $file);
         fclose($fh);
+
+	$file = date("Y-m-d H:i:s") . " $dongle $number $message";
+	$fh = fopen(__DIR__ . "/../log/send/sms.txt", "w");
+        fwrite($fh, $file);
+        fclose($fh);
     }
 
 }
