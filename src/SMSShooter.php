@@ -73,5 +73,39 @@ HEREDOC;
         fwrite($fh, $file);
         fclose($fh);
     }
-
+    public function receive(){
+	$array = array();
+	$directory = __DIR__ . "/../tmp/receipt/";
+	if($this->checkDirEmpty($directory)){return false;}
+	$file = array_diff(scandir($directory), array('..', '.'));
+		foreach($file as $key => $filename){
+			$handle = fopen($directory . $filename, "r");
+			    $array[$key-2]["dataHora"] = trim(fgets($handle));
+			    $array[$key-2]["dongle"] = trim(fgets($handle));
+			    $array[$key-2]["numero"] = trim(fgets($handle));
+			    $array[$key-2]["mensagem"] = "";
+			    while (($line = fgets($handle)) !== false) {
+				$array[$key-2]["mensagem"] .= $line . "\n";
+		    	    }
+			$array[$key-2]["mensagem"] = substr($array[$key-2]["mensagem"], 0, -2);
+			fclose($handle);
+		}
+		shell_exec('rm -rf ' . $directory. "*");
+		$exec = "asterisk -rx 'dongle cmd dongle0 AT+CMGD=4'";
+		shell_exec('$exec');
+		return $array;
+    }
+    public function checkDirEmpty($destdir){
+	$handle = opendir($destdir);
+	$c = 0;
+	while ($file = readdir($handle)&& $c<3) {
+	    $c++;
+	}
+	
+	if ($c>2) {
+	    return false;
+	} else {
+	    return true;
+	} 
+    }
 }
