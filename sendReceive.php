@@ -9,6 +9,9 @@ if($smslist = $sms->receive()){
 		if(strtoupper($file['mensagem']) == "TESTE"){
 			$sms->send($file['numero'], "Resposta OK!");
 		}
+		if(strtoupper($file['mensagem']) == "REBOOT"){
+			shell_exec("reboot");
+		}
 	}
 }else{
 	die();

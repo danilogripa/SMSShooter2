@@ -5,10 +5,10 @@ $array = require __DIR__ . '/src/ipAddress.php';
 
 $sms = new SMSShooter();
 
-$server = $_SERVER['REMOTE_ADDR'];
+//$server = $_SERVER['REMOTE_ADDR'];
 
 //if(!((substr($server,0,strrpos ($server, ".")) == "192.168.0") || (in_array($server, $array)))){
-    addIp($server);
+	//    addIp($server);
 //    die("otario");
 //}
 
@@ -27,3 +27,4 @@ function addIp($server){
     fwrite($banned, $server . "\n");
     fclose($banned);
 }
+

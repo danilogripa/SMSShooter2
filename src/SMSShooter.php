@@ -52,9 +52,7 @@ class SMSShooter {
         if($priority == null){$priority = "5";}
         $filename = rand(100,999) . "." . date("Y-m-d.H:i:s") . "." . $priority;
         $dongle = 'dongle0';
-
         $file = <<<HEREDOC
-
 Channel: LOCAL/SMSShooter@smssend
 Application: Playback
 Data: silence/1&tt-weasels
@@ -63,7 +61,6 @@ SetVar: numero=$number
 SetVar: mensagem="$message"
 Archive: yes
 HEREDOC;
-
 	$fh = fopen(__DIR__ . "/../tmp/send/" . $filename . ".call", "w");
         fwrite($fh, $file);
         fclose($fh);
